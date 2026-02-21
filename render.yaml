@@ -1,0 +1,42 @@
+services:
+  # ── Instance 1 ────────────────────────────────────────────────
+  - type: web
+    name: sms-burst-api-1
+    runtime: python
+    plan: free                      # 512 MB RAM, free tier
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 2 --threads 4 --worker-class gthread --timeout 120 --bind 0.0.0.0:$PORT --max-requests 500 --max-requests-jitter 50
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sms-burst-db
+          property: connectionString
+      - key: MASTER_API_KEY
+        sync: false                 # Set manually in Render dashboard → keep it secret
+      - key: MAX_THREADS
+        value: "8"
+      - key: RATE_LIMIT_PER_MIN
+        value: "30"
+
+  # ── Instance 2 (identical — shares same DB) ───────────────────
+  - type: web
+    name: sms-burst-api-2
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 2 --threads 4 --worker-class gthread --timeout 120 --bind 0.0.0.0:$PORT --max-requests 500 --max-requests-jitter 50
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sms-burst-db
+          property: connectionString
+      - key: MASTER_API_KEY
+        sync: false
+      - key: MAX_THREADS
+        value: "8"
+      - key: RATE_LIMIT_PER_MIN
+        value: "30"
+
+databases:
+  - name: sms-burst-db
+    plan: free
