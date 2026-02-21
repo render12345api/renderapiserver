@@ -217,11 +217,14 @@ def require_api_key(role="user"):
             if not raw_key:
                 return jsonify({"error": "Missing X-API-Key header"}), 401
 
-            info = get_key_info(raw_key)
-            if not info:
-                return jsonify({"error": "Invalid or inactive API key"}), 403
-
-            key_id, key_role, key_rate_limit = info
+            # Check if it's the master key first
+            if raw_key == MASTER_KEY:
+                key_id, key_role, key_rate_limit = 0, "admin", 999
+            else:
+                info = get_key_info(raw_key)
+                if not info:
+                    return jsonify({"error": "Invalid or inactive API key"}), 403
+                key_id, key_role, key_rate_limit = info
 
             # Role check
             if role == "admin" and key_role != "admin":
