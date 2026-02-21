@@ -11,8 +11,9 @@ import os
 import secrets
 import hashlib
 import requests
-import psycopg2
-import psycopg2.pool
+import pg8000
+import pg8000.native
+from urllib.parse import urlparse
 from flask import Flask, request, jsonify
 from functools import wraps
 from datetime import datetime, timedelta
@@ -27,28 +28,45 @@ MASTER_KEY   = os.environ.get("MASTER_API_KEY", "change-me-in-env")   # Admin AP
 RATE_LIMIT   = int(os.environ.get("RATE_LIMIT_PER_MIN", 30))           # requests/min per key
 MAX_THREADS  = int(os.environ.get("MAX_THREADS", 10))                  # thread cap per instance
 
-# ─── DB Pool (max 5 conns → stays well under Render free tier limits) ────────
-_pool = None
+# ─── DB connection (pg8000 — pure Python, works on any Python version) ──────
+_db_params = None
 
-def get_pool():
-    global _pool
-    if _pool is None and DB_URL:
-        _pool = psycopg2.pool.ThreadedConnectionPool(1, 5, DB_URL, connect_timeout=5)
-    return _pool
-
-def get_db():
-    pool = get_pool()
-    if not pool:
+def _parse_db_url():
+    global _db_params
+    if _db_params is not None:
+        return _db_params
+    if not DB_URL:
         return None
     try:
-        return pool.getconn()
+        u = urlparse(DB_URL)
+        _db_params = {
+            "host":     u.hostname,
+            "port":     u.port or 5432,
+            "database": u.path.lstrip("/"),
+            "user":     u.username,
+            "password": u.password,
+            "ssl_context": True,   # Supabase requires SSL
+        }
+        return _db_params
     except Exception as e:
-        logging.error(f"DB pool error: {e}")
+        logging.error(f"DB URL parse error: {e}")
+        return None
+
+def get_db():
+    params = _parse_db_url()
+    if not params:
+        return None
+    try:
+        conn = pg8000.connect(**params)
+        conn.autocommit = False
+        return conn
+    except Exception as e:
+        logging.error(f"DB connect error: {e}")
         return None
 
 def release_db(conn):
     try:
-        get_pool().putconn(conn)
+        conn.close()
     except Exception:
         pass
 
